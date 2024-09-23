@@ -57,7 +57,8 @@ From here we can observe behaviour and patterns of planetIDs across any number o
 Destination node across a 1000 seed trials:
 
 
-![destination_nodes](https://github.com/user-attachments/assets/36b50834-e16a-4821-9729-4cdb71dc48f2)
+
+![destination_nodes](https://github.com/user-attachments/assets/2844a85d-8e2a-4ae2-b154-ecb61c2ca073)
 
 
 •	The inverse pattern is true of the starting node (horizontally flipped & vertically)
