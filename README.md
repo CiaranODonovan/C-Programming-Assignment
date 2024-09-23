@@ -10,4 +10,29 @@ The particular problem of information only being attainable at cost of the optim
 In a graph of 300 nodes, this algorithm averages 13 traversals to the destination node, the lowest number achieved in the competition.
 
 # Graph structure exploitation
-The start node is always at least 60% of the entire graphs size away from the destination node. As a result a common strategy was to split the algorithm into two stages, one where it randomly jumps until a certain distance is achieved, and then a main pathfinder to hone in on the destination node. My algorithm instead shortcuts this process by finding a way to gain every nodeID before its first traversal by exploiting the PRNG used to calculate them. An analysis of the graph structure was required for this solution. 
+The start node is always at least 60% of the entire graphs size away from the destination node. As a result a common strategy was to split the algorithm into two stages, one where it randomly jumps until a certain distance is achieved, and then a main pathfinder to hone in on the destination node. My algorithm instead shortcuts this process by finding a way to gain every nodeID before its first traversal by exploiting the PRNG used to calculate them. An analysis of the graph structure was required for this solution. (Essentially, all native rand() functions are disabled for clients)
+
+
+![map_generation_1](https://github.com/user-attachments/assets/50f64ce9-8e86-4a0b-a4d1-f91700843b21)
+
+The grid size is determined by the grid_size variable, which is initialized to 1.0.
+The number of cells along the x-axis and y-axis is calculated using the formula:
+int num_cells_x = (int)ceil((xlim[1] - xlim[0]) / grid_size);
+int num_cells_y = (int)ceil((ylim[1] - ylim[0]) / grid_size);
+•  xlim[0] and xlim[1] are the limits for the x-axis, and similarly, ylim[0] and ylim[1] are the limits for the y-axis.
+•  num_cells_x and num_cells_y represent the number of grid cells horizontally and vertically, respectively, based on these limits and the grid_size.
+•	The average number of points per cell is based on the density and the area of each cell (grid_size * grid_size).
+•	The expected number of points per cell is calculated as:
+double expected_num_points = density * grid_size * grid_size;
+•	Points are populated in a sequential order from left to right (increasing i index) and top to bottom (increasing j index). This is controlled by the following nested loops:
+for (int i = 0; i < num_cells_x; i++) {
+    for (int j = 0; j < num_cells_y; j++) {
+•	This conditional ensures that generated points lie within the user-specified bounds.
+if (x <= xlim[1] && y <= ylim[1]) {
+
+Given the following values:
+
+
+
+
+
